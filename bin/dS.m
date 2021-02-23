@@ -1,4 +1,4 @@
-function infected = qss(p,time)
+function infected = dS(p,time)
 g  = p(1);
 K  = p(2);
 a  = p(3);
