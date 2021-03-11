@@ -2,6 +2,7 @@
 clear all;
 clc
 
+pop = 19.5;
 %% gernyny
 load ny
 ny = diff(ny);
@@ -12,7 +13,7 @@ ny = ny(pointer:pointer+199)';
 ny05 = movmean(ny, 5);
 
 % fit qss-sir model ntates: (S,I,beta) to raw data 
-q = dSfit(@dS, nt, ny);
+q = dSfit(@dS, nt, ny, pop);
 
 F=@(t,x) [-x(1)*x(2)*x(3)*1e-6; ...
           x(1)*x(2)*x(3) - x(2)*q(1);...
@@ -30,7 +31,7 @@ legend(["Data", "Fit"])
 grid on
 xlabel("Time (days after having 10 daily new COVID cases)")
 ylabel("Number of newly infected indinviduals")
-title("United Kingdom Fit to Raw Data")
+title("State of New York")
 set(gca, 'FontName', 'Times New Roman')
 set(gca, 'FontSize', 16)
 saveas(gcf,'results/nyrawfit.jpg')
@@ -38,7 +39,7 @@ saveas(gcf,'results/nyrawfit','epsc')
 saveas(gcf,'results/nyrawfit.fig')
 
 %% fit to moving mean 5 points
-f05 = dSfit(@dS, nt, ny05);
+f05 = dSfit(@dS, nt, ny05, pop);
 q   = f05;
 F=@(t,x) [-x(1)*x(2)*x(3)*1e-6; ...
           x(1)*x(2)*x(3) - x(2)*q(1);...
@@ -56,7 +57,7 @@ legend(["Data", "Fit"])
 grid on
 xlabel("Time (days after having 10 daily new COVID cases)")
 ylabel("Number of newly infected indinviduals")
-title("United Kingdom Fit to Moving Mean (5 points)")
+title("State of New York")
 set(gca, 'FontName', 'Times New Roman')
 set(gca, 'FontSize', 16)
 saveas(gcf,'results/nyfit05.jpg')

@@ -3,6 +3,7 @@ clear all;
 clc
 
 %% germany
+pop = 83;
 load germany
 gd = diff(gm);
 s = gd(1:50)>10;
@@ -12,7 +13,7 @@ gd = gd(pointer:pointer+149)';
 gd05 = movmean(gd, 5);
 
 % fit qss-sir model states: (S,I,beta) to raw data 
-q = dSfit(@dS, gt, gd);
+q = dSfit(@dS, gt, gd, pop);
 
 F=@(t,x) [-x(1)*x(2)*x(3)*1e-6; ...
           x(1)*x(2)*x(3) - x(2)*q(1);...
@@ -30,7 +31,7 @@ legend(["Data", "Fit"])
 grid on
 xlabel("Time (days after having 10 daily new COVID cases)")
 ylabel("Number of newly infected indinviduals")
-title("Germany Fit to Raw Data")
+title("Germany")
 set(gca, 'FontName', 'Times New Roman')
 set(gca, 'FontSize', 16)
 saveas(gcf,'results/grawfit.jpg')
@@ -38,7 +39,7 @@ saveas(gcf,'results/grawfit','epsc')
 saveas(gcf,'results/grawfit.fig')
 
 %% fit to moving mean 5 points
-f05 = dSfit(@dS, gt, gd05);
+f05 = dSfit(@dS, gt, gd05, pop);
 q   = f05;
 F=@(t,x) [-x(1)*x(2)*x(3)*1e-6; ...
           x(1)*x(2)*x(3) - x(2)*q(1);...
@@ -56,7 +57,7 @@ legend(["Data", "Fit"])
 grid on
 xlabel("Time (days after having 10 daily new COVID cases)")
 ylabel("Number of newly infected indinviduals")
-title("Germany Fit to Moving Mean (5 points)")
+title("Germany")
 set(gca, 'FontName', 'Times New Roman')
 set(gca, 'FontSize', 16)
 saveas(gcf,'results/gmafit05.jpg')

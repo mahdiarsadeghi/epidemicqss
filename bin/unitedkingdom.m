@@ -3,6 +3,7 @@ clear all;
 clc
 
 %% gerukny
+pop = 66;
 load unitedkingdom
 uk = diff(uk);
 s = uk>10;
@@ -12,7 +13,7 @@ uk = uk(pointer:pointer+139)';
 uk05 = movmean(uk, 5);
 
 % fit qss-sir model utates: (S,I,beta) to raw data 
-q = dSfit(@dS, ut, uk);
+q = dSfit(@dS, ut, uk, pop);
 
 F=@(t,x) [-x(1)*x(2)*x(3)*1e-6; ...
           x(1)*x(2)*x(3) - x(2)*q(1);...
@@ -30,7 +31,7 @@ legend(["Data", "Fit"])
 grid on
 xlabel("Time (days after having 10 daily new COVID cases)")
 ylabel("Number of newly infected indinviduals")
-title("United Kingdom Fit to Raw Data")
+title("United Kingdom")
 set(gca, 'FontName', 'Times New Roman')
 set(gca, 'FontSize', 16)
 saveas(gcf,'results/ukrawfit.jpg')
@@ -38,7 +39,7 @@ saveas(gcf,'results/ukrawfit','epsc')
 saveas(gcf,'results/ukrawfit.fig')
 
 %% fit to moving mean 5 points
-f05 = dSfit(@dS, ut, uk05);
+f05 = dSfit(@dS, ut, uk05, pop);
 q   = f05;
 F=@(t,x) [-x(1)*x(2)*x(3)*1e-6; ...
           x(1)*x(2)*x(3) - x(2)*q(1);...
@@ -56,7 +57,7 @@ legend(["Data", "Fit"])
 grid on
 xlabel("Time (days after having 10 daily new COVID cases)")
 ylabel("Number of newly infected indinviduals")
-title("United Kingdom Fit to Moving Mean (5 points)")
+title("United Kingdom")
 set(gca, 'FontName', 'Times New Roman')
 set(gca, 'FontSize', 16)
 saveas(gcf,'results/ukfit05.jpg')
