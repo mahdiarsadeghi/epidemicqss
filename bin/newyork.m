@@ -1,16 +1,12 @@
-%close all;
-clear all;
-clc
-
+%% data
 pop = 19.5;
-%% gernyny
 load ny
 ny = diff(ny);
 s = ny>10;
 pointer = find(s,1,'first');
 nt = 1:200;
 ny = ny(pointer:pointer+199)';
-ny05 = movmean(ny, 5);
+ny05 = movmean(ny, 7);
 
 % fit qss-sir model ntates: (S,I,beta) to raw data 
 q = dSfit(@dS, nt, ny, pop);
@@ -38,7 +34,7 @@ saveas(gcf,'results/nyrawfit.jpg')
 saveas(gcf,'results/nyrawfit','epsc')
 saveas(gcf,'results/nyrawfit.fig')
 
-%% fit to moving mean 5 points
+%% fit to moving mean 7 points
 f05 = dSfit(@dS, nt, ny05, pop);
 q   = f05;
 F=@(t,x) [-x(1)*x(2)*x(3)*1e-6; ...
@@ -60,6 +56,6 @@ ylabel("Number of newly infected indinviduals")
 title("State of New York")
 set(gca, 'FontName', 'Times New Roman')
 set(gca, 'FontSize', 16)
-saveas(gcf,'results/nyfit05.jpg')
-saveas(gcf,'results/nyfit05','epsc')
-saveas(gcf,'results/nyfit05.fig')
+saveas(gcf,'results/nyfit07.jpg')
+saveas(gcf,'results/nyfit07','epsc')
+saveas(gcf,'results/nyfit07.fig')

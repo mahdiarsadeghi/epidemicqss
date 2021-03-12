@@ -1,8 +1,4 @@
-%close all;
-clear all;
-clc
-
-%% germany
+%% data
 pop = 83;
 load germany
 gd = diff(gm);
@@ -10,7 +6,7 @@ s = gd(1:50)>10;
 pointer = find(s,1,'first');
 gt = 1:150;
 gd = gd(pointer:pointer+149)';
-gd05 = movmean(gd, 5);
+gd05 = movmean(gd, 7);
 
 % fit qss-sir model states: (S,I,beta) to raw data 
 q = dSfit(@dS, gt, gd, pop);
@@ -38,7 +34,7 @@ saveas(gcf,'results/grawfit.jpg')
 saveas(gcf,'results/grawfit','epsc')
 saveas(gcf,'results/grawfit.fig')
 
-%% fit to moving mean 5 points
+%% fit to moving mean 7 points
 f05 = dSfit(@dS, gt, gd05, pop);
 q   = f05;
 F=@(t,x) [-x(1)*x(2)*x(3)*1e-6; ...
@@ -60,6 +56,6 @@ ylabel("Number of newly infected indinviduals")
 title("Germany")
 set(gca, 'FontName', 'Times New Roman')
 set(gca, 'FontSize', 16)
-saveas(gcf,'results/gmafit05.jpg')
-saveas(gcf,'results/gmafit05','epsc')
-saveas(gcf,'results/gmafit05.fig')
+saveas(gcf,'results/gmafit07.jpg')
+saveas(gcf,'results/gmafit07','epsc')
+saveas(gcf,'results/gmafit07.fig')
