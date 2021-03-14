@@ -1,11 +1,11 @@
 %% data
 pop = 66;
-load unitedkingdom
+load unitedkingdom2
 uk = diff(uk);
 s = uk>10;
 pointer = find(s,1,'first');
-ut = 1:140;
-uk = uk(pointer:pointer+139)';
+ut = 1:160;
+uk = uk(pointer:pointer+159)';
 uk05 = movmean(uk, 7);
 
 % fit qss-sir model utates: (S,I,beta) to raw data 
