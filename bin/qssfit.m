@@ -2,7 +2,7 @@
 % population should be reported in millions
 % output is a figure and fitted parameters
 % 
-function q = qssfit(data, population, maxdays, text)
+function q = qssfit(data, population, maxdays, text, n)
 %
 newcases = diff(data);
 starttime = newcases>10;
@@ -22,8 +22,8 @@ fitdata = population.*X(:,1).*X(:,2);
 
 figure 
 hold on
-plot(timepoints, fitdata, 'b-', 'LineWidth', 3)
-plot(timepoints, newcases, 'r*'); 
+plot(timepoints, fitdata*n, 'b-', 'LineWidth', 3)
+plot(timepoints, newcases*n, 'r*'); 
 legend(["Model", "Data"])
 grid on
 xlabel("Time (days after having 10 daily new COVID cases)")
@@ -31,9 +31,8 @@ ylabel("Number of newly infected indinviduals")
 title(text)
 set(gca, 'FontName', 'Times New Roman')
 set(gca, 'FontSize', 16)
-text(text == ' ') = [];
-saveas(gcf,join(['results/' text '.jpg']))
-saveas(gcf,join(['results/' text]),'epsc')
-saveas(gcf,join(['results/' text '.fig']))
+saveas(gcf,strrep(join(['results/' text '.jpg']),' ',''))
+saveas(gcf,strrep(join(['results/' text]),' ',''),'epsc')
+saveas(gcf,strrep(join(['results/' text '.fig']),' ',''))
 
 end
