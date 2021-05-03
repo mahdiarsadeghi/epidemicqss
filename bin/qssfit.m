@@ -5,7 +5,7 @@
 function q = qssfit(data, population, maxdays, text, n)
 %
 newcases = diff(data);
-starttime = newcases>10;
+starttime = newcases>10/n;
 % start after having 10 new cases in one day
 pointer = find(starttime,1,'first');
 timepoints = 1:maxdays;

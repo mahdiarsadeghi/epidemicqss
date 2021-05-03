@@ -15,7 +15,7 @@ df  = readmatrix('US.csv');
 txt = string(table2cell(readtable('US.csv')));
 
 state = "New York";
-n = 2;
+n = 20;
 population = 19.5/n;
 maxdays = 200;
 key = txt(:,7)==state;  
@@ -149,7 +149,7 @@ disp(join(['Fitted Parameters (g,K,a,u,I0,b0) for ' country]))
 disp(q(1:6))
 
 country = "Egypt";
-n = 5;
+n = 10;
 population = 100/n;
 maxdays = 320;
 key = txt(:,2)==country; 
@@ -159,7 +159,7 @@ disp(join(['Fitted Parameters (g,K,a,u,I0,b0) for ' country]))
 disp(q(1:6))
 
 country = "Saudi Arabia";
-n = 3;
+n = 10;
 population = 34.3/n;
 maxdays = 350;
 key = txt(:,2)==country; 
