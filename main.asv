@@ -16,57 +16,17 @@ df  = readmatrix('US.csv');
 txt = string(table2cell(readtable('US.csv')));
 
 state = "New York";
-population = 19.5;
-maxdays = 200;
+population = 83;
+maxdays = 160;
 key = txt(:,7)==state;  
-data = sum(df(key,12:end),1);
+data = df(key,5:end);
 q = qssfit(data, population, maxdays, state);
 disp(join(['Fitted Parameters (g,K,a,u,I0,b0) for ' state]))
 disp(q(1:6))
 
-state = "New Jersey";
-population = 8.88;
-maxdays = 200;
-key = txt(:,7)==state;  
-data = sum(df(key,12:end),1);
-q = qssfit(data, population, maxdays, state);
-disp(join(['Fitted Parameters (g,K,a,u,I0,b0) for ' state]))
-disp(q(1:6))
-
-state = "Massachusetts";
-population = 6.9;
-maxdays = 230;
-key = txt(:,7)==state;  
-data = sum(df(key,12:end),1);
-q = qssfit(data, population, maxdays, state);
-disp(join(['Fitted Parameters (g,K,a,u,I0,b0) for ' state]))
-disp(q(1:6))
-
-state = "Arizona";
-population = 7.27;
-maxdays = 200;
-key = txt(:,7)==state;  
-data = sum(df(key,12:end),1);
-q = qssfit(data, population, maxdays, state);
-disp(join(['Fitted Parameters (g,K,a,u,I0,b0) for ' state]))
-disp(q(1:6))
-
-state = "South Dakota";
-population = .88;
-maxdays = 350;
-key = txt(:,7)==state;  
-data = sum(df(key,12:end),1);
-q = qssfit(data, population, maxdays, state);
-disp(join(['Fitted Parameters (g,K,a,u,I0,b0) for ' state]))
-disp(q(1:6))
-
-state = "North Dakota";
-population = .76;
-maxdays = 350;
-key = txt(:,7)==state;  
-data = sum(df(key,12:end),1);
-q = qssfit(data, population, maxdays, state);
-disp(join(['Fitted Parameters (g,K,a,u,I0,b0) for ' state]))
+load ny
+q = qssfit(ny, 19.5, 200, "State of New York");
+disp('Fitted Parameters (g,K,a,u,I0,b0)for NY:')
 disp(q(1:6))
 
 % Countries
@@ -74,7 +34,7 @@ df  = readmatrix('data.csv');
 txt = string(table2cell(readtable('data.csv')));
 
 country = "Germany";
-population = 40;
+population = 83;
 maxdays = 160;
 key = txt(:,2)==country;  
 data = df(key,5:end);
