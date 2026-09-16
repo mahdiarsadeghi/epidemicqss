@@ -1,0 +1,10 @@
+# Operating-system and editor files
+.DS_Store
+*.swp
+*.swo
+*~
+
+# MATLAB generated files
+*.asv
+*.m~
+*.mex*
